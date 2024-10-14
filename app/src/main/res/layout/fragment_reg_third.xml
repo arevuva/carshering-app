@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    tools:context=".register_list.RegThirdFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="731dp"
+        android:padding="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Аватар с кнопкой добавления фото -->
+
+            <!-- Иконка плюса на аватаре -->
+
+            <!-- Текстовое поле с пояснением -->
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/gobackreg1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/chevron_left" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    style="@style/TextHeaderStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/creatingacc" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                tools:layout_conversion_absoluteHeight="116dp"
+                tools:layout_conversion_absoluteWidth="379dp">
+
+                <ImageView
+                    android:id="@+id/avatarImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/avatar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:layout_conversion_absoluteHeight="100dp"
+                    tools:layout_conversion_absoluteWidth="100dp" />
+
+                <ImageView
+                    android:id="@+id/addPhotoButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="15dp"
+                    android:src="@drawable/plus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Поле ввода номера водительского удостоверения -->
+
+            <TextView
+                android:id="@+id/textView9"
+                style="@style/TextCommonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/textgetphoto"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+                tools:layout_conversion_absoluteHeight="51dp"
+                tools:layout_conversion_absoluteWidth="90dp" />
+
+            <LinearLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="275dp"
+                    android:layout_marginLeft="8dp"
+                    style="@style/TextCommonStyle"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/numberdriverlicense" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDriverLicense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    app:errorTextColor="@color/errorColor"
+                    style="@style/EditTextStyle"
+                    android:hint="@string/numberdriverlicense">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/driverLicenseEditText"
+                        style="@style/EditTextStyle"
+                        android:padding="16dp"
+                        android:background="@drawable/edit_text_border"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="10" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <!-- Поле для выбора даты выдачи с DatePickerDialog -->
+            <LinearLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    style="@style/TextCommonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="-5dp"
+                    android:layout_weight="1"
+                    android:text="Дата выдачи" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etDriverDateLayout"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/numberdriverlicense"
+                    app:errorEnabled="true"
+                    app:errorTextColor="@color/errorColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:startIconDrawable="@drawable/calendar"
+                    app:startIconScaleType="centerInside"
+                    app:startIconTint="@color/lightGray">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDriverDate"
+                        style="@style/EditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_text_border"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:inputType="date"
+                        android:paddingVertical="16dp"
+                        android:paddingLeft="50dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <!-- Кнопка для загрузки фото водительского удостоверения -->
+
+
+            <!-- Кнопка "Далее" -->
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="32dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                tools:layout_editor_absoluteX="0dp">
+
+                <ImageView
+                    android:id="@+id/uploadDriverLicenseView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/upload"
+                    tools:layout_conversion_absoluteHeight="50dp"
+                    tools:layout_conversion_absoluteWidth="50dp" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/TextCommonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingVertical="15dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/uploadphoto"
+                    tools:layout_conversion_absoluteHeight="50dp"
+                    tools:layout_conversion_absoluteWidth="330dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="32dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+                tools:layout_editor_absoluteX="153dp">
+
+                <ImageView
+                    android:id="@+id/uploadPassportView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/upload" />
+
+                <TextView
+                    android:paddingVertical="15dp"
+                    android:paddingLeft="10dp"
+                    android:id="@+id/textView11"
+                    style="@style/TextCommonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/uploadphoto" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/nextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/mainbutton"
+                android:text="@string/gonext"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+                tools:layout_conversion_absoluteHeight="48dp"
+                tools:layout_conversion_absoluteWidth="379dp" />
+
+            <TextView
+                style="@style/TextCommonStyle"
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/getphtodriverlicence"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout4" />
+
+            <TextView
+                android:id="@+id/textView12"
+                style="@style/TextCommonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/getpassportphoto"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</FrameLayout>

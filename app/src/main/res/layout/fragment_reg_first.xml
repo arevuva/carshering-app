@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".register_list.RegFirstFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context=".RegisterFragment">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/gobackreg1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/chevron_left" />
+
+            <TextView
+                android:id="@+id/textView7"
+                style="@style/TextHeaderStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/creatingacc" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etEmailLayout"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:hint="@string/getemail"
+            android:inputType="textEmailAddress"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/errorColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:inputType="textEmailAddress"
+                android:padding="16dp"
+                android:textColorHint="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etPasswordLayout"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/getpassword"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/lightGray"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/errorColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etEmailLayout">
+
+            <!-- Поле для ввода текста -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPassword"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!-- Поле повторного ввода пароля -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lConfirmPassword"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/repeatpassword"
+            android:inputType="textPassword"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/lightGray"
+            app:errorTextColor="@color/errorColor"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etPasswordLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfrimTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+        <!-- Чекбокс для принятия условий -->
+        <CheckBox
+            android:id="@+id/cbAgree"
+            style="@style/TextCommonStyle"
+            android:layout_width="379dp"
+            android:layout_height="50dp"
+            android:buttonTint="@color/lightGray"
+            android:gravity="left"
+            android:text="@string/confrim"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lConfirmPassword" />
+
+
+
+        <!-- Кнопка "Далее" -->
+        <Button
+            android:id="@+id/btnNextReg1"
+            style="@style/DarkButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/darkPurple"
+            android:padding="16dp"
+            android:text="@string/gonext"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cbAgree" />
+
+        <TextView
+            style="@style/TextCommonStyle"
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="-5dp"
+            android:text="@string/email"
+            app:layout_constraintBottom_toTopOf="@+id/etEmailLayout"
+            app:layout_constraintStart_toStartOf="@+id/etEmailLayout" />
+
+        <TextView
+            style="@style/TextCommonStyle"
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="-5dp"
+            android:text="@string/givepas"
+            app:layout_constraintBottom_toTopOf="@+id/etPasswordLayout"
+            app:layout_constraintStart_toStartOf="@+id/etPasswordLayout" />
+
+        <TextView
+            android:id="@+id/textView17"
+            style="@style/TextCommonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="-5dp"
+            android:text="@string/repeatpassword"
+            app:layout_constraintBottom_toTopOf="@+id/lConfirmPassword"
+            app:layout_constraintStart_toStartOf="@+id/lConfirmPassword" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

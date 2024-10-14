@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".register_list.RegSecondFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:padding="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Верхняя панель с кнопкой "Назад" и заголовком -->
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/gobackreg1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/chevron_left" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    style="@style/TextHeaderStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/creatingacc" />
+            </LinearLayout>
+
+            <!-- Поле для ввода имени -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etFirstNameLayout"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="@string/getname"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/errorColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFirstName"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_border"
+                    android:inputType="textPersonName"
+                    android:padding="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Поле для ввода фамилии -->
+
+            <!-- Поле для ввода отчества -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etLastNameLayout"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/getsecondname"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/errorColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etFirstNameLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLastName"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_border"
+                    android:inputType="textPersonName"
+                    android:padding="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etMiddleNameLayout"
+                style="@style/EditTextStyle"
+                android:layout_width="match_parent"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/errorColor"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/getthirdname"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etLastNameLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMiddleName"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_border"
+                    android:inputType="textPersonName"
+                    android:padding="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Поле для ввода даты рождения -->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etBirthDateLayout"
+                style="@style/EditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/errorColor"
+                android:hint="@string/getbirthdate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etMiddleNameLayout"
+                app:startIconDrawable="@drawable/calendar"
+                app:startIconScaleType="centerInside"
+                app:startIconTint="@color/lightGray">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBirthDate"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_border"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:inputType="date"
+                    android:paddingVertical="16dp"
+                    android:paddingLeft="50dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- RadioGroup для выбора пола -->
+            <RadioGroup
+                android:id="@+id/rgGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etBirthDateLayout">
+
+                <RadioButton
+                    android:id="@+id/rbMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/radio_button_selector"
+                    android:checked="true"
+                    android:paddingVertical="15dp"
+                    android:text="@string/male"
+                    android:textColor="@android:color/black" />
+
+                <RadioButton
+                    android:id="@+id/rbFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:buttonTint="@color/radio_button_selector"
+                    android:paddingVertical="15dp"
+                    android:text="@string/female"
+                    android:textColor="@android:color/black"
+                    tools:visibility="visible" />
+            </RadioGroup>
+
+            <!-- Кнопка "Далее" -->
+            <Button
+                android:id="@+id/btnNextReg2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/mainbutton"
+                android:padding="16dp"
+                android:text="@string/gonext"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rgGender" />
+
+            <TextView
+                style="@style/TextCommonStyle"
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="-5dp"
+                android:text="@string/birthdate"
+                app:layout_constraintBottom_toTopOf="@+id/etBirthDateLayout"
+                app:layout_constraintStart_toStartOf="@+id/etBirthDateLayout" />
+
+            <TextView
+                style="@style/TextCommonStyle"
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="-5dp"
+                android:text="@string/thirdname"
+                app:layout_constraintBottom_toTopOf="@+id/etMiddleNameLayout"
+                app:layout_constraintStart_toStartOf="@+id/etMiddleNameLayout" />
+
+            <TextView
+                style="@style/TextCommonStyle"
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="-5dp"
+                android:text="@string/secondname"
+                app:layout_constraintBottom_toTopOf="@+id/etLastNameLayout"
+                app:layout_constraintStart_toStartOf="@+id/etLastNameLayout" />
+
+            <TextView
+                style="@style/TextCommonStyle"
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="-5dp"
+                android:text="@string/name"
+                app:layout_constraintBottom_toTopOf="@+id/etFirstNameLayout"
+                app:layout_constraintStart_toStartOf="@+id/etFirstNameLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</FrameLayout>
