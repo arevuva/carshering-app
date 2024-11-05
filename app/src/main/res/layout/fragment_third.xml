@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".list.ThirdFragment">
+    tools:context=".presenter.register_list.onboarding_list.ThirdFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
-        tools:context=".list.ThirdFragment">
+        tools:context=".presenter.register_list.onboarding_list.ThirdFragment">
 
         <ImageView
             android:id="@+id/imageView1"

@@ -1,6 +1,10 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    kotlin("plugin.serialization") version "1.9.0"
+    id("com.google.devtools.ksp")
+    id("kotlin-kapt")
 }
 
 android {
@@ -54,8 +58,25 @@ android {
 
 dependencies {
     implementation("com.tbuonomo:dotsindicator:5.0")
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.room:room-ktx:2.2.5")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+     // Проверьте последнюю версию
+    implementation(platform("io.github.jan-tennert.supabase:bom:3.0.1"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.ktor:ktor-client-android:3.0.0")
     implementation(libs.androidx.core.ktx)
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation ("androidx.room:room-runtime:2.6.1") // Библиотека "Room"
+    kapt("androidx.room:room-compiler:$room_version") // Кодогенератор
     implementation(libs.androidx.appcompat)
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
+    implementation("org.kodein.di:kodein-di-generic-jvm:6.3.3")
+    implementation("org.kodein.di:kodein-di-framework-android-x:6.3.3")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)

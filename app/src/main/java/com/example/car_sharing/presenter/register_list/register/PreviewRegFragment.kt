@@ -1,4 +1,4 @@
-package com.example.car_sharing.register_list
+package com.example.car_sharing.presenter.register_list.register
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.car_sharing.R
 import com.example.car_sharing.databinding.FragmentPreviewRegBinding
-import com.example.car_sharing.databinding.FragmentThirdBinding
 
 class PreviewRegFragment : Fragment() {
     private var _binding: FragmentPreviewRegBinding? = null

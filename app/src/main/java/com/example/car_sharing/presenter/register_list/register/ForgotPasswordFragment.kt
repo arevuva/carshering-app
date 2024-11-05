@@ -1,4 +1,4 @@
-package com.example.car_sharing.register_list
+package com.example.car_sharing.presenter.register_list.register
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

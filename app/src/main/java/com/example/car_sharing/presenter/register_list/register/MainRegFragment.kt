@@ -1,4 +1,4 @@
-package com.example.car_sharing
+package com.example.car_sharing.presenter.register_list.register
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.car_sharing.R
 import com.example.car_sharing.databinding.FragmentMainRegBinding
-import com.example.car_sharing.databinding.FragmentPreviewRegBinding
 
 
 class MainRegFragment : Fragment() {

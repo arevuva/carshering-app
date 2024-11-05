@@ -1,4 +1,4 @@
-package com.example.car_sharing.register_list
+package com.example.car_sharing.presenter.register_list.register
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -7,12 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.car_sharing.R
 import com.example.car_sharing.databinding.FragmentRegSecondBinding
-import com.example.car_sharing.databinding.FragmentSecondBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale

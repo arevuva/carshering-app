@@ -6,6 +6,7 @@
     <color name="inputFieldBorder">#D0D5DD</color>
     <color name="lightGray">#667085</color>
     <color name="errorColor">#F60000</color>
+    <color name="lightPurple">#6EF2C8FF</color>
 
 
 </resources>

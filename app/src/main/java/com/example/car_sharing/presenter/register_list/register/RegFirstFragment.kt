@@ -1,4 +1,4 @@
-package com.example.car_sharing.register_list
+package com.example.car_sharing.presenter.register_list.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.car_sharing.R
-import com.example.car_sharing.databinding.FragmentFirstBinding
 import com.example.car_sharing.databinding.FragmentRegFirstBinding
 
 

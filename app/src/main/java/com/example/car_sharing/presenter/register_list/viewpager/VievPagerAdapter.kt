@@ -1,4 +1,4 @@
-package com.example.car_sharing.viewpager
+package com.example.car_sharing.presenter.register_list.viewpager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

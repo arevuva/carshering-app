@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    tools:context=".register_list.RegThirdFragment">
+    tools:context=".presenter.register_list.register.RegThirdFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -108,15 +108,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9">
 
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="275dp"
-                    android:layout_marginLeft="8dp"
-                    style="@style/TextCommonStyle"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/numberdriverlicense" />
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayoutDriverLicense"
                     android:layout_width="match_parent"
@@ -149,23 +140,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
-                <TextView
-                    android:id="@+id/textView10"
-                    style="@style/TextCommonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginBottom="-5dp"
-                    android:layout_weight="1"
-                    android:text="Дата выдачи" />
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etDriverDateLayout"
                     style="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/numberdriverlicense"
+                    android:hint="Дата получения ВУ"
                     app:errorEnabled="true"
                     app:errorTextColor="@color/errorColor"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -182,7 +163,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_text_border"
-                        android:clickable="true"
                         android:focusable="false"
                         android:inputType="date"
                         android:paddingVertical="16dp"
@@ -201,7 +181,7 @@
                 android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
                 tools:layout_editor_absoluteX="0dp">
@@ -221,7 +201,7 @@
                     android:layout_height="match_parent"
                     android:paddingVertical="15dp"
                     android:paddingLeft="10dp"
-                    android:text="@string/uploadphoto"
+                    android:text="@string/getphtodriverlicence"
                     tools:layout_conversion_absoluteHeight="50dp"
                     tools:layout_conversion_absoluteWidth="330dp" />
 
@@ -231,7 +211,7 @@
                 android:id="@+id/linearLayout5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
                 tools:layout_editor_absoluteX="153dp">
@@ -243,13 +223,13 @@
                     android:src="@drawable/upload" />
 
                 <TextView
-                    android:paddingVertical="15dp"
-                    android:paddingLeft="10dp"
                     android:id="@+id/textView11"
                     style="@style/TextCommonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/uploadphoto" />
+                    android:paddingVertical="15dp"
+                    android:paddingLeft="10dp"
+                    android:text="@string/getpassportphoto" />
 
             </LinearLayout>
 
@@ -267,24 +247,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
                 tools:layout_conversion_absoluteHeight="48dp"
                 tools:layout_conversion_absoluteWidth="379dp" />
-
-            <TextView
-                style="@style/TextCommonStyle"
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/getphtodriverlicence"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout4" />
-
-            <TextView
-                android:id="@+id/textView12"
-                style="@style/TextCommonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/getpassportphoto"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

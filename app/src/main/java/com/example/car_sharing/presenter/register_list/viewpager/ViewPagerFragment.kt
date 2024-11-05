@@ -1,4 +1,4 @@
-package com.example.car_sharing.viewpager
+package com.example.car_sharing.presenter.register_list.viewpager
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.car_sharing.R
-import com.example.car_sharing.list.FirstFragment
-import com.example.car_sharing.list.SecondFragment
-import com.example.car_sharing.list.ThirdFragment
+import com.example.car_sharing.presenter.register_list.onboarding_list.FirstFragment
+import com.example.car_sharing.presenter.register_list.onboarding_list.SecondFragment
+import com.example.car_sharing.presenter.register_list.onboarding_list.ThirdFragment
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 
 

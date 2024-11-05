@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".register_list.RegFirstFragment">
+    tools:context=".presenter.register_list.register.RegFirstFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@android:color/white"
@@ -151,39 +151,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cbAgree" />
-
-        <TextView
-            style="@style/TextCommonStyle"
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="-5dp"
-            android:text="@string/email"
-            app:layout_constraintBottom_toTopOf="@+id/etEmailLayout"
-            app:layout_constraintStart_toStartOf="@+id/etEmailLayout" />
-
-        <TextView
-            style="@style/TextCommonStyle"
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="-5dp"
-            android:text="@string/givepas"
-            app:layout_constraintBottom_toTopOf="@+id/etPasswordLayout"
-            app:layout_constraintStart_toStartOf="@+id/etPasswordLayout" />
-
-        <TextView
-            android:id="@+id/textView17"
-            style="@style/TextCommonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="-5dp"
-            android:text="@string/repeatpassword"
-            app:layout_constraintBottom_toTopOf="@+id/lConfirmPassword"
-            app:layout_constraintStart_toStartOf="@+id/lConfirmPassword" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

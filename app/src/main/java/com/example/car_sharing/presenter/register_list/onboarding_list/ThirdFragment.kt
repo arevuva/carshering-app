@@ -1,4 +1,4 @@
-package com.example.car_sharing.list
+package com.example.car_sharing.presenter.register_list.onboarding_list
 
 import android.content.Context
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.car_sharing.R
-import com.example.car_sharing.databinding.FragmentSecondBinding
 import com.example.car_sharing.databinding.FragmentThirdBinding
 
 

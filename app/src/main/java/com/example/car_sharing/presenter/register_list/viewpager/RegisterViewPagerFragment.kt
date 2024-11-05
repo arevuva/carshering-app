@@ -1,4 +1,4 @@
-package com.example.car_sharing.viewpager
+package com.example.car_sharing.presenter.register_list.viewpager
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,12 +8,10 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.viewpager2.widget.ViewPager2
 import com.example.car_sharing.R
-import com.example.car_sharing.register_list.RegFinishFragment
-import com.example.car_sharing.register_list.RegFirstFragment
-import com.example.car_sharing.register_list.RegSecondFragment
-import com.example.car_sharing.register_list.RegThirdFragment
-
-import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+import com.example.car_sharing.presenter.register_list.register.RegFinishFragment
+import com.example.car_sharing.presenter.register_list.register.RegFirstFragment
+import com.example.car_sharing.presenter.register_list.register.RegSecondFragment
+import com.example.car_sharing.presenter.register_list.register.RegThirdFragment
 
 
 class RegisterViewPagerFragment : Fragment() {

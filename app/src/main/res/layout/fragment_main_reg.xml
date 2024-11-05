@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainRegFragment">
+    tools:context=".presenter.register_list.register.MainRegFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/authGoogle"
@@ -48,7 +48,7 @@
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:hint="@string/getemail"
             android:inputType="textEmailAddress"
             app:errorEnabled="true"
@@ -74,13 +74,12 @@
             style="@style/EditTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:hint="@string/getpassword"
             app:endIconMode="password_toggle"
             app:endIconTint="@color/lightGray"
             app:errorEnabled="true"
-            app:hintAnimationEnabled="true"
             app:errorTextColor="@color/errorColor"
+            app:hintAnimationEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etEmailLayout">
@@ -180,28 +179,6 @@
                 app:layout_constraintVertical_bias="0.333" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textView4"
-            style="@style/TextCommonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="-5dp"
-            android:text="Электронная почта"
-            app:layout_constraintBottom_toTopOf="@+id/etEmailLayout"
-            app:layout_constraintStart_toStartOf="@+id/etEmailLayout" />
-
-        <TextView
-            android:id="@+id/textView5"
-            style="@style/TextCommonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="-5dp"
-            android:text="@string/password"
-            app:layout_constraintBottom_toTopOf="@+id/etPasswordLayout"
-            app:layout_constraintStart_toStartOf="@+id/etPasswordLayout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
