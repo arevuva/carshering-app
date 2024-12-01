@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainHomeFragment"
-        android:name="com.example.car_sharing.presenter.register_list.main.MainHomeFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.main.MainHomeFragment"
         android:label="fragment_main_home"
         tools:layout="@layout/fragment_main_home" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainSettingsFragment"
-        android:name="com.example.car_sharing.presenter.register_list.settings.mainSettingsFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.settings.mainSettingsFragment"
         android:label="fragment_main_settings"
         tools:layout="@layout/fragment_main_settings" >
         <action
@@ -25,17 +25,17 @@
     </fragment>
     <fragment
         android:id="@+id/mainFavouritesFragment"
-        android:name="com.example.car_sharing.presenter.register_list.main.MainFavouritesFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.main.MainFavouritesFragment"
         android:label="fragment_main_favourites"
         tools:layout="@layout/fragment_main_favourites" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.car_sharing.presenter.register_list.settings.ProfileFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.settings.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/searchCarResultFragment"
-        android:name="com.example.car_sharing.presenter.register_list.main.SearchCarResultFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.main.SearchCarResultFragment"
         android:label="fragment_search_car_result"
         tools:layout="@layout/fragment_search_car_result" >
         <action

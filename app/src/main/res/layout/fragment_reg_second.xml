@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presenter.register_list.register.RegSecondFragment">
+    tools:context=".presenter.common_presenter.register.RegSecondFragment">
 
     <ScrollView
         android:layout_width="match_parent"

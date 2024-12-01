@@ -6,7 +6,7 @@
     app:startDestination="@id/splashScreenFragment">
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.example.car_sharing.presenter.register_list.viewpager.ViewPagerFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.viewpager.ViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainRegFragment"
-        android:name="com.example.car_sharing.presenter.register_list.register.MainRegFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.register.MainRegFragment"
         android:label="fragment_main_reg"
         tools:layout="@layout/fragment_main_reg" >
         <action
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/previewRegFragment"
-        android:name="com.example.car_sharing.presenter.register_list.register.PreviewRegFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.register.PreviewRegFragment"
         android:label="fragment_preview_reg"
         tools:layout="@layout/fragment_preview_reg" >
         <action
@@ -77,17 +77,17 @@
     </fragment>
     <fragment
         android:id="@+id/registerViewPagerFragment"
-        android:name="com.example.car_sharing.presenter.register_list.viewpager.RegisterViewPagerFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.viewpager.RegisterViewPagerFragment"
         android:label="fragment_register_view_pager"
         tools:layout="@layout/fragment_register_view_pager" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.car_sharing.presenter.register_list.main.HomeFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.main.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.example.car_sharing.presenter.register_list.register.ForgotPasswordFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.register.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
 </navigation>

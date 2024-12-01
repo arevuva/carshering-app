@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.car_sharing.R
-import com.example.car_sharing.data.db.entities.Car
+import com.example.car_sharing.data.supabase_db.Car
 import com.example.car_sharing.databinding.ItemCarBinding
 
 class CarAdapter(
@@ -20,8 +20,8 @@ class CarAdapter(
 
         fun bind(item: Car) {
             // Устанавливаем текстовые данные
-            binding.textViewBrand.text = item.brand
-            binding.textViewCarModel.text = item.model
+            binding.textViewBrand.text = item.brandName
+            binding.textViewCarModel.text = item.modelName
             binding.textViewCarPrice.text = "${item.pricePerDay}₽ в день"
             binding.textViewCarTransmission.text = item.transmission
             binding.textViewCarFuelType.text = item.fuelType

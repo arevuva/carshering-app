@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presenter.register_list.viewpager.ViewPagerFragment">
+    tools:context=".presenter.common_presenter.viewpager.ViewPagerFragment">
 
     <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
         android:id="@+id/worm_dots_indicator"

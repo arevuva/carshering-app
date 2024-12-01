@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presenter.register_list.main.HomeFragment">
+    tools:context=".presenter.common_presenter.main.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
