@@ -1,24 +1,44 @@
 package com.example.car_sharing.data.repositories
 
 import com.example.car_sharing.data.supabase_db.CarDto
+import com.example.car_sharing.data.supabase_db.CarFullDto
 import com.example.car_sharing.data.supabase_db.SPConfig
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.postgrest.query.Columns
 import io.github.jan.supabase.storage.Storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class CarRepositoryModule {
+
+    @Binds
+    abstract fun bindCarRepository(
+        carRepositoryImpl: CarRepositoryImpl
+    ): CarRepository
+}
+
+
 interface CarRepository {
 //    suspend fun createCar(car: Car): Boolean
     suspend fun getCars(): List<CarDto>?
-    suspend fun getCar(id: String): CarDto
+    suspend fun getFavouriteCars(): List<CarDto>?
+    suspend fun getCar(id: String): CarFullDto?
+    fun buildImageUrl(imageFileName: String):String
+
 //    suspend fun deleteCar(id: String)
 //    suspend fun updateCar(
 //        id: String, name: String, price: Double, imageName: String, imageFile: ByteArray
 //    )
 }
 
-class ProductRepositoryImpl @Inject constructor(
+class CarRepositoryImpl @Inject constructor(
     private val postgrest: Postgrest,
     private val storage: Storage,
 ) : CarRepository {
@@ -31,17 +51,25 @@ class ProductRepositoryImpl @Inject constructor(
         }
     }
 
-
-    override suspend fun getCar(id: String): CarDto {
+    override suspend fun getFavouriteCars(): List<CarDto>? {
         return withContext(Dispatchers.IO) {
-            postgrest.from("cars").select {
+            val result = postgrest.from("cars")
+                .select().decodeList<CarDto>()
+            result
+        }
+    }
+
+
+    override suspend fun getCar(id: String): CarFullDto {
+        return withContext(Dispatchers.IO) {
+            postgrest.from("cars").select(Columns.list("id", "name", "brand")) {
                 filter {
                     eq("id", id)
                 }
-            }.decodeSingle<CarDto>()
+            }.decodeSingle<CarFullDto>()
         }
     }
-    private fun buildImageUrl(imageFileName: String) =
+    override fun buildImageUrl(imageFileName: String) =
         "${SPConfig.supabaseUrl}/storage/v1/object/public/${imageFileName}"
 
 //    override suspend fun updateProduct(

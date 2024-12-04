@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.car_sharing.R
-import com.example.car_sharing.data.db.entities.Car
+import com.example.car_sharing.data.supabase_db.Car
 import com.example.car_sharing.data.ui.CarAdapter
 import com.example.car_sharing.databinding.FragmentMainHomeBinding
 
@@ -34,44 +34,54 @@ class MainHomeFragment : Fragment() {
         // Создаем список фиктивных машин
         val Cars = listOf(
             Car(
-                brand = "Mercedes-Benz",
-                model = "S 500",
-                pricePerDay = 2500,
-                transmission = "A/T",
-                fuelType = "Бензин",
-                imageUrl = "https://example.com/image1.jpg"
-            ),
-            Car(
-                brand = "BMW",
-                model = "X5",
+                brandName = "BMW",
+                modelName = "X5",
                 pricePerDay = 3000,
                 transmission = "A/T",
                 fuelType = "Бензин",
-                imageUrl = "https://example.com/image2.jpg"
+                description = "vwweewvvwev",
+                location = "<FPFPFPFP",
+                imageUrl = "https://example.com/image1.jpg"
             ),
             Car(
-                brand = "Toyota",
-                model = "Camry",
-                pricePerDay = 1500,
+                brandName = "BMW",
+                modelName = "X5",
+                pricePerDay = 3000,
                 transmission = "A/T",
                 fuelType = "Бензин",
-                imageUrl = "https://avatars.mds.yandex.net/i?id=663501823c62adbf46f82dc1bf027f9b_l-5268458-images-thumbs&n=13"
+                description = "vwweewvvwev",
+                location = "<FPFPFPFP",
+                imageUrl = "https://example.com/image1.jpg"
             ),
             Car(
-                brand = "Toyota",
-                model = "Camry",
-                pricePerDay = 1500,
+                brandName = "BMW",
+                modelName = "X5",
+                pricePerDay = 3000,
                 transmission = "A/T",
                 fuelType = "Бензин",
-                imageUrl = "https://avatars.mds.yandex.net/i?id=663501823c62adbf46f82dc1bf027f9b_l-5268458-images-thumbs&n=13"
+                description = "vwweewvvwev",
+                location = "<FPFPFPFP",
+                imageUrl = "https://example.com/image1.jpg"
             ),
             Car(
-                brand = "Toyota",
-                model = "Camry",
-                pricePerDay = 1500,
+                brandName = "BMW",
+                modelName = "X5",
+                pricePerDay = 3000,
                 transmission = "A/T",
                 fuelType = "Бензин",
-                imageUrl = "https://avatars.mds.yandex.net/i?id=663501823c62adbf46f82dc1bf027f9b_l-5268458-images-thumbs&n=13"
+                description = "vwweewvvwev",
+                location = "<FPFPFPFP",
+                imageUrl = "https://example.com/image1.jpg"
+            ),
+            Car(
+                brandName = "BMW",
+                modelName = "X5",
+                pricePerDay = 3000,
+                transmission = "A/T",
+                fuelType = "Бензин",
+                description = "vwweewvvwev",
+                location = "<FPFPFPFP",
+                imageUrl = "https://example.com/image1.jpg"
             )
 
 

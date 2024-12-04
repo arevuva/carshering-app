@@ -7,6 +7,8 @@ plugins {
     kotlin("plugin.serialization") version "1.9.0"
     id("com.google.devtools.ksp")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
+
 //    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
 }
 
@@ -104,8 +106,10 @@ dependencies {
     implementation ("io.ktor:ktor-client-android:$ktor_version")
     implementation ("io.ktor:ktor-client-core:$ktor_version")
     implementation ("io.ktor:ktor-utils:$ktor_version")
-    implementation ("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+
+    implementation("com.google.dagger:hilt-android:2.52")
+    kapt("com.google.dagger:hilt-compiler:2.52")
+
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation(libs.androidx.appcompat)
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")

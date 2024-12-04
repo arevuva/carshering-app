@@ -20,9 +20,7 @@ import com.example.car_sharing.databinding.FragmentRegFirstBinding
 class RegFirstFragment : Fragment() {
     private var _binding: FragmentRegFirstBinding? = null
     private val binding get() = _binding!!
-    private val signUpViewModel: SignUpViewModel by viewModels(
-        ownerProducer = { requireParentFragment() }
-    )
+    private val signUpViewModel: SignUpViewModel by activityViewModels()
     var isValid = true
 
     override fun onCreateView(
@@ -36,7 +34,7 @@ class RegFirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.etTextPassword.addTextChangedListener(object : TextWatcher {
+        binding.etEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // Вызываем метод onEmailChange при изменении текста
                 s?.let {

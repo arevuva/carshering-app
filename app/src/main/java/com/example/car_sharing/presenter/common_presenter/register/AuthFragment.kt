@@ -1,22 +1,28 @@
 package com.example.car_sharing.presenter.common_presenter.register
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.car_sharing.R
+import com.example.car_sharing.data.viewmodels.SignInViewModel
+import com.example.car_sharing.data.viewmodels.SignUpViewModel
 import com.example.car_sharing.databinding.FragmentMainRegBinding
 
 
-class MainRegFragment : Fragment() {
+class AuthFragment : Fragment() {
 
     // ViewBinding переменная
     private var _binding: FragmentMainRegBinding? = null
     var isValid = true
     private val binding get() = _binding!!
+    private val signInViewModel: SignInViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,13 +34,42 @@ class MainRegFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+        binding.etEmail.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // Вызываем метод onEmailChange при изменении текста
+                s?.let {
+                    signInViewModel.onEmailChange(it.toString())
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+        binding.etTextPassword.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // Вызываем метод onEmailChange при изменении текста
+                s?.let {
+                    signInViewModel.onPasswordChange(it.toString())
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
         binding.btnLogin.setOnClickListener {
             validateInput()
-            if(isValid){
-                findNavController().navigate(R.id.action_mainRegFragment_to_homeFragment)
+            if (isValid) {
+                signInViewModel.onSignIn()
             }
-
         }
+
+        // Наблюдаем за результатом авторизации
+        signInViewModel.signInResult.observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                findNavController().navigate(R.id.action_mainRegFragment_to_homeFragment)
+            } else {
+                Toast.makeText(requireContext(), "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         binding.tvRegister.setOnClickListener{
             findNavController().navigate(R.id.action_mainRegFragment_to_registerViewPagerFragment)
         }
@@ -47,7 +82,7 @@ class MainRegFragment : Fragment() {
 
     private fun validateInput() {
         val email = binding.etEmail.text.toString().trim()
-        val password = binding.editTextPassword.text.toString().trim()
+        val password = binding.etTextPassword.text.toString().trim()
 
         // Сброс ошибок перед валидацией
         binding.etEmailLayout.error = null

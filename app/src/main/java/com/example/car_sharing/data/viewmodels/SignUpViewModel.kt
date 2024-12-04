@@ -1,5 +1,7 @@
 package com.example.car_sharing.data.viewmodels
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -84,25 +86,21 @@ class SignUpViewModel @Inject constructor(
         _numberDriverLicense.value = numberDriverLicense
     }
 
-    fun onUserPhotoChange(imageBytes: ByteArray) {
+    fun onUserPhotoChange(imageBytes: ByteArray, fileName: String) {
         _userPhoto.value = imageBytes
+        _userPhotoName.value = fileName
     }
 
-    fun onDriverLicensePhotoChange(driverLicensePhoto: ByteArray) {
+    fun onDriverLicensePhotoChange(driverLicensePhoto: ByteArray, fileName: String) {
         _driverLicensePhoto.value = driverLicensePhoto
+        _driverLicensePhotoName.value = fileName
     }
 
-    fun onPassportPhotoChange(passportPhoto: ByteArray) {
+    fun onPassportPhotoChange(passportPhoto: ByteArray, fileName: String) {
         _passportPhoto.value = passportPhoto
+        _passportPhotoName.value = fileName
     }
-//    private suspend fun uploadImage(fileName: String, imageBytes: ByteArray) {
-//        val response = supabase.storage.from("user-photos").upload(fileName, imageBytes)
-//        if (response.isSuccess) {
-//            println("Uploaded $fileName: ${response.data?.publicUrl}")
-//        } else {
-//            println("Failed to upload $fileName: ${response.error?.message}")
-//        }
-//    }
+
 
     fun onSignUp() {
         viewModelScope.launch {
@@ -113,7 +111,7 @@ class SignUpViewModel @Inject constructor(
                 secondName = _secondName.value,
                 thirdName = _thirdName.value,
                 gender = _gender.value,
-                phoneNumber = _phoneNumber.value,
+//                phoneNumber = _phoneNumber.value,
                 dateBirth = _dateBirth.value,
                 dateDriverLicense = _dateDriverLicense.value,
                 numberDriverLicense = _numberDriverLicense.value,

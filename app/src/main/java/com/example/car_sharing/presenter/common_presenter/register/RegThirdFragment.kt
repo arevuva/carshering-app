@@ -3,6 +3,8 @@ package com.example.car_sharing.presenter.common_presenter.register
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -14,11 +16,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.car_sharing.R
 import com.example.car_sharing.data.viewmodels.SignUpViewModel
 import com.example.car_sharing.databinding.FragmentRegThirdBinding
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -29,12 +33,66 @@ class RegThirdFragment : Fragment() {
     private val binding get() = _binding!!
     var isValid = true
     private val calendar = Calendar.getInstance()
-    private val signUpViewModel: SignUpViewModel by viewModels(
-        ownerProducer = { requireParentFragment() }
-    )
+    private val signUpViewModel: SignUpViewModel by activityViewModels()
     private val imageKeyMap = mutableMapOf<ImageView, String>()
     private var selectedImageView: ImageView? = null
 
+    // Лаунчер для получения результата выбора изображения
+    private val selectImageLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val imageUri: Uri? = result.data?.data
+                imageUri?.let { uri ->
+                    val fileName = getFileNameFromUri(uri) // Получаем название файла
+                    selectedImageView?.setImageURI(uri) // Отображаем изображение в ImageView
+
+                    // Читаем байты изображения и сжимаем
+                    val compressedBytes = compressImage(uri)
+                    compressedBytes?.let { bytes ->
+                        onImageSelectedCallback?.invoke(bytes, fileName) // Передаем сжатые байты и название файла
+
+                    }
+                }
+            }
+        }
+    // Функция для сжатия изображения
+    private fun compressImage(uri: Uri, maxWidth: Int = 600, maxHeight: Int = 600, quality: Int = 80): ByteArray? {
+        try {
+            val inputStream = requireContext().contentResolver.openInputStream(uri)
+            val originalBitmap = BitmapFactory.decodeStream(inputStream)
+
+            // Вычисляем новые размеры изображения
+            val aspectRatio = originalBitmap.width.toFloat() / originalBitmap.height.toFloat()
+            val width = if (originalBitmap.width > originalBitmap.height) maxWidth else (maxHeight * aspectRatio).toInt()
+            val height = if (originalBitmap.height > originalBitmap.width) maxHeight else (maxWidth / aspectRatio).toInt()
+
+            // Создаем измененный Bitmap
+            val resizedBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, true)
+
+            // Сжимаем изображение в JPEG с заданным качеством
+            val outputStream = ByteArrayOutputStream()
+            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
+
+            return outputStream.toByteArray()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+    // Колбэк для обработки выбранного изображения
+    private var onImageSelectedCallback: ((ByteArray, String) -> Unit)? = null
+
+    private fun getFileNameFromUri(uri: Uri): String {
+        var fileName = "unknown_file"
+        val cursor = requireContext().contentResolver.query(uri, null, null, null, null)
+        cursor?.use {
+            val nameIndex = cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME)
+            if (nameIndex >= 0 && cursor.moveToFirst()) {
+                fileName = cursor.getString(nameIndex)
+            }
+        }
+        return fileName
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,13 +102,6 @@ class RegThirdFragment : Fragment() {
         return binding.root
     }
 
-    // Лаунчер для получения результата выбора изображения
-    private val selectImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val imageUri: Uri? = result.data?.data
-            selectedImageView?.setImageURI(imageUri)  // Отображаем выбранное изображение в ImageView
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,21 +119,32 @@ class RegThirdFragment : Fragment() {
         binding.etDriverDate.setOnClickListener {
             showDatePickerDialog()
         }
-
+        binding.etDriverDate.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // Вызываем метод onEmailChange при изменении текста
+                s?.let {
+                    signUpViewModel.onDateDriverLicenseChange(it.toString())
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
         // Устанавливаем обработчик для каждого ImageView
         binding.avatarImageView.setOnClickListener {
-            selectImageFromGallery(binding.avatarImageView) { imageBytes ->
-                signUpViewModel.onUserPhotoChange(imageBytes)
+            selectImageFromGallery(binding.avatarImageView) { imageBytes, fileName ->
+                signUpViewModel.onUserPhotoChange(imageBytes, fileName)
             }
         }
+
         binding.uploadDriverLicenseView.setOnClickListener {
-            selectImageFromGallery(binding.uploadDriverLicenseView) { imageBytes ->
-                signUpViewModel.onDriverLicensePhotoChange(imageBytes)
+            selectImageFromGallery(binding.uploadDriverLicenseView) { imageBytes, fileName ->
+                signUpViewModel.onDriverLicensePhotoChange(imageBytes, fileName)
             }
         }
+
         binding.uploadPassportView.setOnClickListener {
-            selectImageFromGallery(binding.uploadPassportView) { imageBytes ->
-                signUpViewModel.onPassportPhotoChange(imageBytes)
+            selectImageFromGallery(binding.uploadPassportView) { imageBytes, fileName ->
+                signUpViewModel.onPassportPhotoChange(imageBytes, fileName)
             }
         }
         binding.nextButton.setOnClickListener{
@@ -90,33 +152,23 @@ class RegThirdFragment : Fragment() {
             if(isValid){
                 activity?.findViewById<ViewPager2>(R.id.vpreg2)?.currentItem = 3
             }
-        }
+            signUpViewModel.onSignUp()
 
+        }
 
     }
 
 
     // Функция для выбора изображения из галереи
-    private fun selectImageFromGallery(imageView: ImageView, onImageSelected: (ByteArray) -> Unit) {
+    private fun selectImageFromGallery(
+        imageView: ImageView,
+        onImageSelected: (ByteArray, String) -> Unit
+    ) {
         selectedImageView = imageView
+        onImageSelectedCallback = onImageSelected // Сохраняем колбэк
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         selectImageLauncher.launch(intent)
-
-        // Лаунчер для обработки результата
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val imageUri: Uri? = result.data?.data
-                val byteArray = imageUri?.let { uri ->
-                    requireContext().contentResolver.openInputStream(uri)?.readBytes()
-                }
-                byteArray?.let {
-                    selectedImageView?.setImageURI(imageUri) // Отображение изображения
-                    onImageSelected(it) // Обновление ViewModel
-                }
-            }
-        }
     }
-
 
     private fun showDatePickerDialog() {
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->

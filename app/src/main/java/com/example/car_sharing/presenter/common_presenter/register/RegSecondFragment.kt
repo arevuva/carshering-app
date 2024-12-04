@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.car_sharing.R
@@ -24,9 +25,7 @@ class RegSecondFragment : Fragment() {
     private val binding get() = _binding!!
     private var isValid=true
     private val calendar = Calendar.getInstance()
-    private val signUpViewModel: SignUpViewModel by viewModels(
-        ownerProducer = { requireParentFragment() }
-    )
+    private val signUpViewModel: SignUpViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -105,6 +104,11 @@ class RegSecondFragment : Fragment() {
             val middleName = binding.etMiddleName.text.toString().trim()
             val birthDate = binding.etBirthDate.text.toString().trim()
             val gender = if (binding.rbMale.isChecked) "Мужской" else "Женский"
+            signUpViewModel.onFirstNameChange(firstName)
+            signUpViewModel.onSecondNameChange(middleName)
+            signUpViewModel.onThirdNameChange(lastName)
+            signUpViewModel.onDateBirthChange(birthDate)
+            signUpViewModel.onGenderChange(gender)
 
             // Валидация данных
             validateInput(lastName, firstName, middleName, birthDate)

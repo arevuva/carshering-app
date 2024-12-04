@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.car_sharing.data.db.entities.Car
+import com.example.car_sharing.data.supabase_db.Car
 import com.example.car_sharing.data.ui.CarAdapter
 import com.example.car_sharing.databinding.FragmentSearchCarResultBinding
 
@@ -34,20 +34,24 @@ class SearchCarResultFragment : Fragment() {
         // Создаем список фиктивных машин
         val Cars = listOf(
             Car(
-                brand = "Mercedes-Benz",
-                model = "S 500",
+                brandName = "Mercedes-Benz",
+                modelName = "S 500",
                 pricePerDay = 2500,
                 transmission = "A/T",
                 fuelType = "Бензин",
+                location = "FFFFF",
+                description = "{EEPFPEGEG",
                 imageUrl = "https://example.com/image1.jpg"
             ),
             Car(
-                brand = "BMW",
-                model = "X5",
-                pricePerDay = 3000,
+                brandName = "Mercedes-Benz",
+                modelName = "S 500",
+                pricePerDay = 2500,
                 transmission = "A/T",
                 fuelType = "Бензин",
-                imageUrl = "https://example.com/image2.jpg"
+                location = "FFFFF",
+                description = "{EEPFPEGEG",
+                imageUrl = "https://example.com/image1.jpg"
             ),
 
 

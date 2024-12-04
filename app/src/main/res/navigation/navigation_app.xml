@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainRegFragment"
-        android:name="com.example.car_sharing.presenter.common_presenter.register.MainRegFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.register.AuthFragment"
         android:label="fragment_main_reg"
         tools:layout="@layout/fragment_main_reg" >
         <action

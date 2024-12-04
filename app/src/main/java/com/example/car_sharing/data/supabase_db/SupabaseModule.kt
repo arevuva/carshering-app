@@ -18,12 +18,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object SupabaseModule {
-
     @Provides
     @Singleton
     fun provideSupabaseClient(): SupabaseClient {
         return createSupabaseClient(
-            supabaseUrl = "https://swtfrzmikshmbyahtbvg.supabase.com",
+            supabaseUrl = "https://swtfrzmikshmbyahtbvg.supabase.co",
             supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN3dGZyem1pa3NobWJ5YWh0YnZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzA1ODY4MDYsImV4cCI6MjA0NjE2MjgwNn0.HyfsWj04wKROoQ5LBYqyurY7kzQcj-fIiSg0E307CQU"
         ) {
             install(Postgrest)

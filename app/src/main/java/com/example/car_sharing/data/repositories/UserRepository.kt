@@ -1,12 +1,18 @@
 package com.example.car_sharing.data.repositories
 
+import android.util.Log
 import com.example.car_sharing.data.supabase_db.SPConfig
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import io.github.jan.supabase.BuildConfig
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.auth.providers.Google
 import io.github.jan.supabase.auth.providers.builtin.Email
+import io.github.jan.supabase.auth.providers.builtin.Phone
 import io.github.jan.supabase.postgrest.Postgrest
-import io.github.jan.supabase.storage.BucketApi
+import io.github.jan.supabase.storage.FileUploadResponse
 import io.github.jan.supabase.storage.Storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,9 +23,21 @@ import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class UserRepositoryModule {
+
+    @Binds
+    abstract fun bindUserRepository(
+        userRepositoryImpl: UserRepositoryImpl
+    ): UserRepository
+}
+
 interface UserRepository {
     suspend fun signIn(email: String, password: String): Boolean
     suspend fun uploadImage(filePath: String, imageBytes: ByteArray): String?
+    fun buildImageUrl(imageFileName: String): String
+    suspend fun uploadPhoto(photoName:String, file:ByteArray, email: String): FileUploadResponse
     suspend fun signUp(
         email: String,
         password: String,
@@ -27,7 +45,7 @@ interface UserRepository {
         secondName: String,
         thirdName: String,
         gender: String,
-        phoneNumber: String,
+//        phoneNumber: String,
         dateBirth: String,
         dateDriverLicense: String,
         numberDriverLicense: String,
@@ -39,6 +57,7 @@ interface UserRepository {
         passportPhotoFile: ByteArray,
     ): Boolean
     suspend fun signInWithGoogle(): Boolean
+
 }
 
 class UserRepositoryImpl @Inject constructor(
@@ -47,18 +66,19 @@ class UserRepositoryImpl @Inject constructor(
     private val storage: Storage
 ) : UserRepository {
 
-    fun parseDate(dateString: String): Date? {
-        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        return try {
-            format.parse(dateString)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            null
-        }
+    fun parseDate(dateString: String): String {
+        // Укажите исходный формат даты (если он отличается от желаемого)
+        val inputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+
+        // Преобразование
+        val date: Date = inputFormat.parse(dateString)
+        return outputFormat.format(date)
     }
+
     override suspend fun signIn(email: String, password: String): Boolean {
         return try {
-            val result = auth.signInWith(Email) {
+            auth.signInWith(Email) {
                 this.email = email
                 this.password = password
 
@@ -73,18 +93,19 @@ class UserRepositoryImpl @Inject constructor(
             val metadata = user.userMetadata
 
             // Извлекаем дополнительные данные из таблицы "users"
-            withContext(Dispatchers.IO) {
-                val userInfo = postgrest.from("users")
-                    .select {
-                        filter {
-                            eq("id", userId)
-                        }
-                    }
-                println("User Info: $userInfo")
-            }
+//            withContext(Dispatchers.IO) {
+//                val userInfo = postgrest.from("users")
+//                    .select {
+//                        filter {
+//                            eq("id", userId)
+//                        }
+//                    }
+//                println("User Info: $userInfo")
+//            }
 
             true
         } catch (e: Exception) {
+            Log.e("UserRepository", e.toString())
             false
         }
 
@@ -104,8 +125,8 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun signUp(
         email: String, password: String, firstName: String, secondName: String, thirdName: String, gender: String,
-        phoneNumber: String, dateBirth: String, dateDriverLicense: String, numberDriverLicense: String,
-
+         dateBirth: String, dateDriverLicense: String, numberDriverLicense: String,
+//        phoneNumber: String,
         userPhotoName: String, userPhotoFile: ByteArray,
         driverLicensePhotoName: String, driverLicensePhotoFile: ByteArray,
         passportPhotoName: String,
@@ -114,44 +135,52 @@ class UserRepositoryImpl @Inject constructor(
         return try {
             withContext(Dispatchers.IO) {
 
-                val avatarPath = userPhotoFile.let { uploadImage("$userPhotoName.jpg", it) }
-                val driverLicensePath = driverLicensePhotoFile.let { uploadImage("$driverLicensePhotoName.jpg", it) }
-                val passportPath = passportPhotoFile.let { uploadImage("$passportPhotoName.jpg", it) }
 
-                val imageUrl =
-                    storage["users"].upload(
-                        path = "$userPhotoName.png",
-                        data = userPhotoFile,
-                        options = {upsert = false}
-                    )
 
                 auth.signUpWith(Email) {
                     this.email = email
                     this.password = password
+
                     this.data = buildJsonObject {
                         put("first_name", firstName)
                         put("second_name", secondName)
                         put("third_name", thirdName)
                         put("gender", gender)
-                        put("phone_number", phoneNumber)
-                        put("date_birth", dateBirth)
-                        put("date_driver_license", dateDriverLicense)
+//                        put("phone_number", phoneNumber)
+                        put("date_birth", parseDate(dateBirth))
+                        put("date_driver_license", parseDate(dateDriverLicense))
                         put("number_driver_license", numberDriverLicense)
-
-                        put("user_photo", avatarPath?.let { buildImageUrl(it) })
-                        put("driver_license_photo", driverLicensePath?.let { buildImageUrl(it) })
-                        put("passport_photo", passportPath?.let { buildImageUrl(it) })
+                        put("user_photo", buildImageUrl(email+userPhotoName) )
+                        put("driver_license_photo", buildImageUrl(email+driverLicensePhotoName))
+                        put("passport_photo", buildImageUrl(email+passportPhotoName))
                     }
                 }
+                val buckets = storage.retrieveBuckets()
+                Log.d("BBUCKETS", buckets.size.toString())
+
+                uploadPhoto(email+userPhotoName,userPhotoFile, email)
+                uploadPhoto(email+driverLicensePhotoName,driverLicensePhotoFile, email)
+                uploadPhoto(email+passportPhotoName,passportPhotoFile, email)
             }
+
             true
         } catch (e: Exception) {
             e.printStackTrace()
             false
         }
     }
-    private fun buildImageUrl(imageFileName: String) =
-        "https://swtfrzmikshmbyahtbvg.supabase.com/storage/buckets/users-photo/${imageFileName}"
+
+    override suspend fun uploadPhoto(photoName:String, photoile:ByteArray, email: String): FileUploadResponse {
+
+        return storage.from("users-photo").upload(
+            path = "$photoName",
+            data = photoile,
+            options = { upsert = false }
+        )
+
+    }
+    override fun buildImageUrl(imageFileName: String) =
+        "https://swtfrzmikshmbyahtbvg.supabase.co/storage/v1/object/public/users-photo/${imageFileName}"
 
     override suspend fun signInWithGoogle(): Boolean {
         return try {

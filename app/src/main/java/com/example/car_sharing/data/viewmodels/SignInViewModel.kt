@@ -1,5 +1,7 @@
 package com.example.car_sharing.data.viewmodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.car_sharing.data.repositories.UserRepository
@@ -20,6 +22,9 @@ class SignInViewModel @Inject constructor(
     private val _password = MutableStateFlow("")
     val password = _password
 
+    private val _signInResult = MutableLiveData<Boolean>()
+    val signInResult: LiveData<Boolean> get() = _signInResult
+
     fun onEmailChange(email: String) {
         _email.value = email
     }
@@ -28,12 +33,13 @@ class SignInViewModel @Inject constructor(
         _password.value = password
     }
 
-    fun onSignIn() {
+    fun onSignIn(){
         viewModelScope.launch {
-            userRepository.signIn(
+            val result = userRepository.signIn(
                 email = _email.value,
                 password = _password.value
             )
+            _signInResult.postValue(result)
         }
     }
 
