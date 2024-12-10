@@ -7,18 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.car_sharing.R
 import com.example.car_sharing.data.supabase_db.Car
 import com.example.car_sharing.data.ui.CarAdapter
+import com.example.car_sharing.data.viewmodels.CarListViewModel
 import com.example.car_sharing.databinding.FragmentMainHomeBinding
+import kotlinx.coroutines.launch
 
 
 class MainHomeFragment : Fragment() {
 
     private var _binding: FragmentMainHomeBinding? = null
     private val binding get() = _binding!!
+    private val carListViewModel: CarListViewModel by activityViewModels() // Общая ViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,62 +36,6 @@ class MainHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Создаем список фиктивных машин
-        val Cars = listOf(
-            Car(
-                brandName = "BMW",
-                modelName = "X5",
-                pricePerDay = 3000,
-                transmission = "A/T",
-                fuelType = "Бензин",
-                description = "vwweewvvwev",
-                location = "<FPFPFPFP",
-                imageUrl = "https://example.com/image1.jpg"
-            ),
-            Car(
-                brandName = "BMW",
-                modelName = "X5",
-                pricePerDay = 3000,
-                transmission = "A/T",
-                fuelType = "Бензин",
-                description = "vwweewvvwev",
-                location = "<FPFPFPFP",
-                imageUrl = "https://example.com/image1.jpg"
-            ),
-            Car(
-                brandName = "BMW",
-                modelName = "X5",
-                pricePerDay = 3000,
-                transmission = "A/T",
-                fuelType = "Бензин",
-                description = "vwweewvvwev",
-                location = "<FPFPFPFP",
-                imageUrl = "https://example.com/image1.jpg"
-            ),
-            Car(
-                brandName = "BMW",
-                modelName = "X5",
-                pricePerDay = 3000,
-                transmission = "A/T",
-                fuelType = "Бензин",
-                description = "vwweewvvwev",
-                location = "<FPFPFPFP",
-                imageUrl = "https://example.com/image1.jpg"
-            ),
-            Car(
-                brandName = "BMW",
-                modelName = "X5",
-                pricePerDay = 3000,
-                transmission = "A/T",
-                fuelType = "Бензин",
-                description = "vwweewvvwev",
-                location = "<FPFPFPFP",
-                imageUrl = "https://example.com/image1.jpg"
-            )
-
-
-
-        )
         binding.searchEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val query = binding.searchEditText.text.toString()
@@ -100,10 +49,17 @@ class MainHomeFragment : Fragment() {
 
         // Настройка RecyclerView
         binding.carRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.carRecyclerView.adapter = CarAdapter(Cars)
+        lifecycleScope.launch {
+            carListViewModel.getCars()
+            carListViewModel.carList.collect { cars ->
+                binding.carRecyclerView.adapter = CarAdapter(cars ?: emptyList()) { carId ->
+                    val action = MainHomeFragmentDirections.actionMainHomeFragmentToCarDetailFragment(carId)
+                    findNavController().navigate(action)
+                }
+                }
+            }
+        }
 
-
-    }
 
 
 

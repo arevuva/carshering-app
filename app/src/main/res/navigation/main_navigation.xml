@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainHomeFragment_to_searchCarResultFragment"
             app:destination="@id/searchCarResultFragment" />
+        <action
+            android:id="@+id/action_mainHomeFragment_to_carDetailFragment"
+            app:destination="@id/carDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainSettingsFragment"
@@ -27,7 +30,11 @@
         android:id="@+id/mainFavouritesFragment"
         android:name="com.example.car_sharing.presenter.common_presenter.main.MainFavouritesFragment"
         android:label="fragment_main_favourites"
-        tools:layout="@layout/fragment_main_favourites" />
+        tools:layout="@layout/fragment_main_favourites" >
+        <action
+            android:id="@+id/action_mainFavouritesFragment_to_carDetailFragment"
+            app:destination="@id/carDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.car_sharing.presenter.common_presenter.settings.ProfileFragment"
@@ -41,5 +48,46 @@
         <action
             android:id="@+id/action_searchCarResultFragment_to_mainHomeFragment"
             app:destination="@id/mainHomeFragment" />
+        <action
+            android:id="@+id/action_searchCarResultFragment_to_carDetailFragment"
+            app:destination="@id/carDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/carDetailFragment"
+        android:name="com.example.car_sharing.presenter.common_presenter.main.CarDetailFragment"
+        android:label="fragment_car_detail"
+        tools:layout="@layout/fragment_car_detail" >
+        <argument
+            android:name="CarId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_carDetailFragment_to_takeRentFragment"
+            app:destination="@id/takeRentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/takeRentFragment"
+        android:name="com.example.car_sharing.TakeRentFragment"
+        android:label="fragment_take_rent"
+        tools:layout="@layout/fragment_take_rent"
+        >
+        <argument
+            android:name="car"
+            app:argType="com.example.car_sharing.data.supabase_db.Car" />
+        <action
+            android:id="@+id/action_takeRentFragment_to_successBookFragment"
+            app:destination="@id/successBookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successBookFragment"
+        android:name="com.example.car_sharing.SuccessBookFragment"
+        android:label="fragment_success_book"
+        tools:layout="@layout/fragment_success_book" >
+        <action
+            android:id="@+id/action_successBookFragment_to_mainFavouritesFragment"
+            app:destination="@id/mainFavouritesFragment" />
+        <action
+            android:id="@+id/action_successBookFragment_to_mainHomeFragment"
+            app:destination="@id/mainHomeFragment" />
+    </fragment>
+
 </navigation>

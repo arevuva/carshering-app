@@ -1,16 +1,13 @@
 package com.example.car_sharing.data.repositories
 
 import android.util.Log
-import com.example.car_sharing.data.supabase_db.SPConfig
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.github.jan.supabase.BuildConfig
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.auth.providers.Google
 import io.github.jan.supabase.auth.providers.builtin.Email
-import io.github.jan.supabase.auth.providers.builtin.Phone
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.storage.FileUploadResponse
 import io.github.jan.supabase.storage.Storage
@@ -38,6 +35,7 @@ interface UserRepository {
     suspend fun uploadImage(filePath: String, imageBytes: ByteArray): String?
     fun buildImageUrl(imageFileName: String): String
     suspend fun uploadPhoto(photoName:String, file:ByteArray, email: String): FileUploadResponse
+    suspend fun getCurrentUserId() : String
     suspend fun signUp(
         email: String,
         password: String,
@@ -74,6 +72,11 @@ class UserRepositoryImpl @Inject constructor(
         // Преобразование
         val date: Date = inputFormat.parse(dateString)
         return outputFormat.format(date)
+    }
+
+    override suspend fun getCurrentUserId(): String{
+        return auth.retrieveUserForCurrentSession(updateSession = true).id
+
     }
 
     override suspend fun signIn(email: String, password: String): Boolean {

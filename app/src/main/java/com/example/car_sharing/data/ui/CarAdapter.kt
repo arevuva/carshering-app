@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.car_sharing.R
 import com.example.car_sharing.data.supabase_db.Car
 import com.example.car_sharing.databinding.ItemCarBinding
 
 class CarAdapter(
     private val cars: List<Car>,
-//    private val onItemClicked: (Car) -> Unit
+    private val onCarClicked: (String) -> Unit
 ) : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
     inner class CarViewHolder(private val binding: ItemCarBinding) :
@@ -26,11 +27,17 @@ class CarAdapter(
             binding.textViewCarTransmission.text = item.transmission
             binding.textViewCarFuelType.text = item.fuelType
 
-//            // Загружаем изображение машины с помощью Glide
-//            Glide.with(binding.imageViewCar.context)
-//                .load(item.imageUrl)
-//                .placeholder(R.drawable.ic_car_placeholder) // Плейсхолдер для загрузки
-//                .into(binding.imageViewCar)
+            // Загружаем изображение через Glide
+            Glide.with(binding.imageViewCar.context)
+                .load(item.imageUrl)
+                .placeholder(R.drawable.car_phone) // Заглушка на время загрузки
+                .error(R.drawable.car_phone) // Заглушка при ошибке
+                .into(binding.imageViewCar)
+            binding.buttonDetails
+
+            binding.buttonDetails.setOnClickListener {
+                onCarClicked(item.carId)
+            }
         }
     }
 

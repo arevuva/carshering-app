@@ -16,7 +16,7 @@ class CarListViewModel @Inject constructor(
     private val carRepository: CarRepository,
     ):ViewModel() {
     private val _carList = MutableStateFlow<List<Car>?>(listOf())
-    val carList: Flow<List<Car>?> = _carList
+    val carList: Flow<List<Car>?> get()= _carList
 
 
     private val _isLoading = MutableStateFlow(false)
@@ -53,9 +53,7 @@ class CarListViewModel @Inject constructor(
             pricePerDay = this.pricePerDay,
             transmission = this.transmission,
             fuelType = this.fuelType,
-            imageUrl = this.imageUrl,
-            location = this.location,
-            description = this.description
+            imageUrl = this.imageUrl
         )
     }
 

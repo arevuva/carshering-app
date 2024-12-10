@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/mercedes_s500"
+                android:minHeight="100dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/linearLayout3"
                 app:layout_constraintTop_toTopOf="parent" />

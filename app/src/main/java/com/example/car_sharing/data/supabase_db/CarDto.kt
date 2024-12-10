@@ -1,62 +1,62 @@
 package com.example.car_sharing.data.supabase_db
 
-import androidx.room.PrimaryKey
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class CarDto(
     @SerialName("id")
-    val id : Int,
+    val id : String,
 
-    @SerialName("brand_name")
+    @SerialName("brandName")
     val brandName: String,
 
-    @SerialName("model_name")
+    @SerialName("modelName")
     val modelName: String,
 
-    @SerialName("price_per_day")
+    @SerialName("pricePerDay")
     val pricePerDay: Int,
 
-    @SerialName("transmission_type")
+    @SerialName("transmission")
     val transmission: String,
 
-    @SerialName("fuel_type")
+    @SerialName("fuelType")
     val fuelType: String,
 
-    @SerialName("image_url")
+    @SerialName("imageUrl")
     val imageUrl: String,
 
-    @SerialName("location")
-    val location: String,  // Добавлено поле для местоположения
-
-    @SerialName("description")
-    val description: String // Добавлено поле для описания
 )
 
+@Serializable
 data class CarFullDto(
     @SerialName("id")
-    val id : Int,
+    val id : String,
 
-    @SerialName("brand_name")
+    @SerialName("brandName")
     val brandName: String,
 
-    @SerialName("model_name")
+    @SerialName("modelName")
     val modelName: String,
 
-    @SerialName("price_per_day")
+    @SerialName("pricePerDay")
     val pricePerDay: Int,
 
-    @SerialName("transmission_type")
+    @SerialName("transmission")
     val transmission: String,
 
-    @SerialName("fuel_type")
+    @SerialName("fuelType")
     val fuelType: String,
 
-    @SerialName("image_url")
+    @SerialName("imageUrl")
     val imageUrl: String,
 
     @SerialName("location")
-    val location: String,  // Добавлено поле для местоположения
+    val location: String,
 
     @SerialName("description")
-    val description: String // Добавлено поле для описания
+    val description: String,
+
+    @SerialName("available")
+    val available: Boolean
 )
